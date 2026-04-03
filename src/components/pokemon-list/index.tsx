@@ -18,6 +18,8 @@ const gridComponents = {
   Item: PokeGridItem,
 };
 
+const DEFAULT_LITMIT = 20;
+
 export function PokemonList() {
   const {
     pokemons,
@@ -28,9 +30,11 @@ export function PokemonList() {
     isFetchingMore,
     search,
     setSearch,
-  } = usePokemonList(20);
+  } = usePokemonList(DEFAULT_LITMIT);
 
   if (error) return <PokemonListError refetch={refetch} />;
+
+  const firstLoading = loading && !pokemons.length;
   const isEmpty = !loading && !pokemons.length;
 
   return (
@@ -42,7 +46,7 @@ export function PokemonList() {
       </div>
 
       <AnimatePresence mode="popLayout" initial={false}>
-        {loading ? (
+        {firstLoading ? (
           <PokemonListLoading />
         ) : isEmpty ? (
           <PokemonListEmpty />

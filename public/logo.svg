@@ -1,0 +1,22 @@
+<svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pokeGradient" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF1C1C"/>
+      <stop offset="100%" stop-color="#CA0000"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <blur stdDeviation="2"/>
+    </filter>
+  </defs>
+  <!-- Poké Ball Graphic -->
+  <circle cx="40" cy="50" r="30" fill="white" stroke="#2D2D2D" stroke-width="4"/>
+  <path d="M10 50 A30 30 0 0 1 70 50" fill="url(#pokeGradient)" stroke="#2D2D2D" stroke-width="4"/>
+  <line x1="10" y1="50" x2="70" y2="50" stroke="#2D2D2D" stroke-width="4"/>
+  <circle cx="40" cy="50" r="10" fill="white" stroke="#2D2D2D" stroke-width="4"/>
+  <circle cx="40" cy="50" r="5" fill="white" stroke="#2D2D2D" stroke-width="1"/>
+  
+  <!-- Typography -->
+  <text x="85" y="68" fill="white" style="font-family: 'Inter', sans-serif; font-weight: 900; font-size: 52px; letter-spacing: -2px;">
+    Pokédex
+  </text>
+</svg>

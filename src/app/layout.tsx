@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: "Pokédex | Ultra Premium Pokemon Explorer",
   description:
     "A state-of-the-art Pokedex built with Next.js, Apollo GraphQL, and DDD principles.",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

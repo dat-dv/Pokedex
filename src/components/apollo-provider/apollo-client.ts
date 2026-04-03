@@ -1,8 +1,9 @@
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+import { APP_CONFIG } from "@/constants/config";
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: "https://beta.pokeapi.co/graphql/v1beta",
+    uri: APP_CONFIG.GRAPHQL_ENDPOINT,
     headers: {
       "Content-Type": "application/json",
     },
@@ -12,7 +13,7 @@ const client = new ApolloClient({
       Query: {
         fields: {
           pokemon_v2_pokemon: {
-            keyArgs: false,
+            keyArgs: ["where"],
             merge(existing = [], incoming) {
               return [...existing, ...incoming];
             },

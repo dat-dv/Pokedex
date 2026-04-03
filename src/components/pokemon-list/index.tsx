@@ -1,12 +1,10 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { usePokemonList } from "@/hooks/use-pokemon-list";
 import { PokemonCard } from "../pokemon-card";
 import { Search } from "../search";
 import { PokemonListEmpty } from "../empty-list";
 import { VirtualGrid } from "../virtual-grid";
-import { STAGGER_CONTAINER } from "@/constants/animations";
 import { Pokemon } from "@/domains/pokemon/models/pokemon";
 import PokemonListError from "./pokemon-list.error";
 import PokemonListLoading from "./pokemon-list.loading";
@@ -45,18 +43,21 @@ export function PokemonList() {
         </div>
       </div>
 
-      <AnimatePresence mode="popLayout" initial={false}>
-        {firstLoading ? (
-          <PokemonListLoading />
-        ) : isEmpty ? (
-          <PokemonListEmpty />
-        ) : (
-          <motion.div
-            variants={STAGGER_CONTAINER}
-            initial="initial"
-            animate="animate"
-            className="w-full"
-          >
+      <div className="w-full relative min-h-[600px]">
+        {firstLoading && (
+          <div className="absolute inset-0 z-10 bg-[#0a0a0a]">
+            <PokemonListLoading />
+          </div>
+        )}
+        
+        {isEmpty && !firstLoading && (
+          <div className="pt-10">
+            <PokemonListEmpty />
+          </div>
+        )}
+
+        {!isEmpty && !firstLoading && (
+          <div className="w-full transition-opacity duration-300">
             <VirtualGrid
               key="virtual-list"
               items={pokemons}
@@ -74,9 +75,9 @@ export function PokemonList() {
                 />
               )}
             />
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </div>
     </div>
   );
 }

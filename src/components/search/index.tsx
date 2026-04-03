@@ -1,7 +1,6 @@
 "use client";
 
 import { useDebounce } from "@/hooks/use-debounce";
-import { motion } from "framer-motion";
 import { Search as SearchIcon, Filter } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -32,11 +31,7 @@ export function Search({ value, onChange }: SearchProps) {
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="relative max-w-3xl mx-auto group"
-    >
+    <div className="relative max-w-3xl mx-auto group">
       <div className="absolute left-7 top-1/2 -translate-y-1/2 z-10 text-white/40 group-focus-within:text-blue-400 group-hover:text-blue-500 transition-all duration-300">
         <SearchIcon size={20} strokeWidth={2.5} />
       </div>
@@ -58,6 +53,6 @@ export function Search({ value, onChange }: SearchProps) {
           ⌘ K
         </kbd>
       </div>
-    </motion.div>
+    </div>
   );
 }

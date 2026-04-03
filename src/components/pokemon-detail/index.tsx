@@ -28,15 +28,11 @@ export default function PokemonDetail() {
 
   return (
     <div className="min-h-screen relative">
-      <div
-        className={cn(
-          "absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-[160px] opacity-20 pointer-events-none transition-all duration-1000",
-          colorSet.split(" ")[0],
-        )}
-      />
-      <BackNavigation />
+      <div className="mb-20 fixed top-0 left-1/2 -translate-x-1/2 bg-[#0a0a0a]/95 w-full border-b border-solid border-white/5 z-100">
+        <BackNavigation className="py-3 max-w-[1200px] mx-auto " />
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div className="mt-30 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <PokemonHero
           pokemon={pokemon}
           typeColors={TYPE_COLORS}

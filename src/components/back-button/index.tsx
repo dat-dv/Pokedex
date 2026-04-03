@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,7 @@ export function BackNavigation({ className }: { className?: string }) {
   const router = useRouter();
 
   return (
-    <div className="sticky top-0 z-[100] py-8 backdrop-blur-xl border-b border-white/5 -mx-6 px-6 mb-16">
+    <div className={cn("sticky top-0 z-[100]", className)}>
       <motion.button
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}

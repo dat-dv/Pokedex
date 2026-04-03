@@ -16,13 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pokédex | Ultra Premium Pokemon Explorer",
+  title: "Pokédex | Pokemon Explorer",
   description:
     "A state-of-the-art Pokedex built with Next.js, Apollo GraphQL, and DDD principles. Experience the galaxy of Pokemon.",
   metadataBase: new URL(APP_CONFIG.SITE_URL),
   applicationName: "UltraDex",
   authors: [{ name: "datdv", url: "https://datdoan.dev" }],
-  keywords: ["Pokemon", "Pokedex", "GraphQL", "Next.js", "Ultra Premium", "UX"],
+  keywords: ["Pokemon", "Pokedex", "GraphQL", "Next.js", "UX"],
   icons: {
     icon: "/icon.svg",
     apple: "/icon.svg",
@@ -30,12 +30,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "UltraDex | The Future of Pokémon Exploration",
     description:
-      "Discover Pokémon with a futuristic, high-performance interface. Try the Ultra Premium Pokedex now.",
+      "Discover Pokémon with a futuristic, high-performance interface. Try the Ultra Pokedex now.",
     url: APP_CONFIG.SITE_URL,
     siteName: "UltraDex",
     images: [
       {
-        url: "/og-image.png",
+        url: `${APP_CONFIG.SITE_URL}/og-image.svg`,
         width: 1200,
         height: 630,
         alt: "UltraDex Social Thumbnail",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: "UltraDex | The Future of Pokémon Exploration",
     description:
       "Discover Pokémon with a futuristic, high-performance interface.",
-    images: ["/og-image.png"],
+    images: [`${APP_CONFIG.SITE_URL}/og-image.svg`],
     creator: "@datdv",
   },
   alternates: {

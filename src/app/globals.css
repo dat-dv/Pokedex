@@ -4,7 +4,6 @@
   --background: #000000;
   --foreground: #ffffff;
 
-  /* Antigravity Premium Palette */
   --accent-primary: #3b82f6;
   --accent-secondary: #ec4899;
   --glass-bg: rgba(255, 255, 255, 0.05);
@@ -39,7 +38,6 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* Custom Scrollbar for Premium Feel */
 ::-webkit-scrollbar {
   width: 6px;
 }

@@ -1,5 +1,10 @@
 import PokemonDetail from "@/components/pokemon-detail";
+import { Suspense } from "react";
 
 export default function PokemonPage() {
-  return <PokemonDetail />;
+  return (
+    <Suspense fallback={null}>
+      <PokemonDetail />
+    </Suspense>
+  );
 }

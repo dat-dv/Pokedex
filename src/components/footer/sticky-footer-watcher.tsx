@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useEffectEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/utils/cn";
 
-type FooterType = "hidden" | "static" | "fixed";
+type FooterType = "hidden" | "fixed";
 
 export function StickyFooterWatcher({
   children,
@@ -12,27 +13,27 @@ export function StickyFooterWatcher({
 }) {
   const [footerType, setFooterType] = useState<FooterType>("hidden");
 
+  console.log(footerType);
   const updateFooterState = useEffectEvent(() => {
-    const scrollY = window.scrollY;
-    const bodyHeight = document.documentElement.scrollHeight;
-    const viewportHeight = window.innerHeight;
+    const totalScroll = document.documentElement.scrollHeight;
+    const hasScroll = totalScroll > window.innerHeight;
 
-    // Threshold: only hide if page is significantly longer than 1.1x viewport
-    const longPageThreshold = viewportHeight * 1.1;
-
-    // Condition A: Short page (< 110vh) -> Absolutely must show static footer
-    if (bodyHeight <= longPageThreshold) {
-      setFooterType("static");
+    if (!hasScroll) {
+      setFooterType("fixed");
       return;
     }
 
-    // Condition B: Long page (> 110vh)
-    // Logic: Hide at the very top, but show sticky once scrolled past 300px
-    // This allows better visibility on pages that are just over the limit
-    if (scrollY > 300) {
-      setFooterType("fixed");
-    } else {
+    const vh100 = window.innerHeight;
+    const scrollOffSetTop = window.scrollY;
+    const currentScrollHeight = scrollOffSetTop + vh100;
+    const scrollPoint = 1.1;
+    const isTotalScrollGratherThan110vh = totalScroll / vh100 > scrollPoint;
+    const isOver110vh = currentScrollHeight / vh100 >= scrollPoint;
+
+    if (isTotalScrollGratherThan110vh && !isOver110vh) {
       setFooterType("hidden");
+    } else {
+      setFooterType("fixed");
     }
   });
 
@@ -60,30 +61,28 @@ export function StickyFooterWatcher({
       window.removeEventListener("resize", updateFooterState);
       observer.disconnect();
     };
-  }, [updateFooterState]);
+  }, []);
 
   return (
-    <div className="w-full">
+    <div className="w-full max-h-[60vh] overflow-hidden">
       <AnimatePresence mode="wait">
-        {footerType === "fixed" ? (
+        {footerType !== "hidden" && (
           <motion.div
             key="fixed-footer"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed bottom-0 left-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl border-t border-white/10"
+            className={cn(
+              "w-full z-50 bg-[#0a0a0a] border-t border-solid border-white/10",
+              footerType === "fixed"
+                ? "fixed bottom-0 left-1/2 -translate-x-1/2"
+                : "fixed bottom-0 left-1/2 -translate-x-1/2",
+            )}
           >
-            <div className="max-w-[1440px] mx-auto px-12 py-4">{children}</div>
+            {children}
           </motion.div>
-        ) : footerType === "static" ? (
-          <div
-            key="static-footer"
-            className="mt-16 py-8 border-t border-white/5 w-full bg-transparent text-center"
-          >
-            <div className="max-w-[1440px] mx-auto px-12">{children}</div>
-          </div>
-        ) : null}
+        )}
       </AnimatePresence>
     </div>
   );

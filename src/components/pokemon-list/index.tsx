@@ -36,9 +36,9 @@ export function PokemonList() {
   const isEmpty = !loading && !pokemons.length;
 
   return (
-    <div className="space-y-16">
-      <div className="sticky top-4 z-50 pointer-events-none">
-        <div className="pointer-events-auto">
+    <div className="space-y-16 min-h-[100vh]">
+      <div className="sticky top-0 pt-4 pb-2 z-[60] -mx-6 px-6 bg-[#0a0a0a]/60 backdrop-blur-2xl border-b border-transparent focus-within:border-white/5 transition-all duration-300">
+        <div className="max-w-3xl mx-auto">
           <Search value={search} onChange={setSearch} />
         </div>
       </div>

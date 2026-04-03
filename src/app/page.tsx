@@ -3,9 +3,9 @@ import { HomeBanner } from "@/components/banner";
 
 export default function Home() {
   return (
-    <div className="">
+    <>
       <HomeBanner />
       <PokemonList />
-    </div>
+    </>
   );
 }

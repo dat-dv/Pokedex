@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ApolloWrapper } from "@/components/apollo-provider/ApolloWrapper";
-import { Footer } from "@/components/footer";
+import StickyFooter from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,12 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="antialiased font-sans">
+      <body className="antialiased font-sans overflow-x-hidden bg-[#0a0a0a]">
         <ApolloWrapper>
-          <div className="flex flex-col min-h-screen bg-[#0a0a0a]">
-            <div className="max-w-[1440px] w-full mx-auto px-6">
-              <main className="flex-grow">{children}</main>
-              <Footer />
+          <div className="flex flex-col min-h-screen">
+            <div className="max-w-[1440px] w-full mx-auto px-6 flex flex-col min-h-screen">
+              <main className="flex-grow mb-24">{children}</main>
+              <StickyFooter />
             </div>
           </div>
         </ApolloWrapper>

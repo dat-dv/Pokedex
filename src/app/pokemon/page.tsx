@@ -1,6 +1,4 @@
-"use client";
-
-import { PokemonDetail } from "@/components/pokemon-detail";
+import PokemonDetail from "@/components/pokemon-detail";
 
 export default function PokemonPage() {
   return <PokemonDetail />;

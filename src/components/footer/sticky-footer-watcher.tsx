@@ -10,24 +10,26 @@ export function StickyFooterWatcher({
 }: {
   children: React.ReactNode;
 }) {
-  const [footerType, setFooterType] = useState<FooterType>("static");
+  const [footerType, setFooterType] = useState<FooterType>("hidden");
 
   const updateFooterState = useEffectEvent(() => {
     const scrollY = window.scrollY;
     const bodyHeight = document.documentElement.scrollHeight;
     const viewportHeight = window.innerHeight;
-    const threshold = viewportHeight * 1.1;
 
-    // Condition A: Short page (< 110vh) -> Always show static
-    if (bodyHeight <= threshold) {
+    // Threshold: only hide if page is significantly longer than 1.1x viewport
+    const longPageThreshold = viewportHeight * 1.1;
+
+    // Condition A: Short page (< 110vh) -> Absolutely must show static footer
+    if (bodyHeight <= longPageThreshold) {
       setFooterType("static");
       return;
     }
 
     // Condition B: Long page (> 110vh)
-    // Default (top) -> Hidden
-    // Scrolled past threshold (110vh) -> Fixed
-    if (scrollY > threshold) {
+    // Logic: Hide at the very top, but show sticky once scrolled past 300px
+    // This allows better visibility on pages that are just over the limit
+    if (scrollY > 300) {
       setFooterType("fixed");
     } else {
       setFooterType("hidden");
@@ -35,9 +37,21 @@ export function StickyFooterWatcher({
   });
 
   useEffect(() => {
+    // Check height frequently during initial load and after DOM changes
     updateFooterState();
-    const observer = new MutationObserver(updateFooterState);
-    observer.observe(document.body, { childList: true, subtree: true });
+
+    const observer = new MutationObserver(() => {
+      // Small delay to ensure browser has calculated the new heights
+      setTimeout(updateFooterState, 50);
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      characterData: true,
+    });
+
     window.addEventListener("scroll", updateFooterState, { passive: true });
     window.addEventListener("resize", updateFooterState);
 
@@ -46,12 +60,12 @@ export function StickyFooterWatcher({
       window.removeEventListener("resize", updateFooterState);
       observer.disconnect();
     };
-  }, []);
+  }, [updateFooterState]);
 
   return (
     <div className="w-full">
       <AnimatePresence mode="wait">
-        {footerType === "fixed" && (
+        {footerType === "fixed" ? (
           <motion.div
             key="fixed-footer"
             initial={{ opacity: 0, y: 50 }}
@@ -62,16 +76,14 @@ export function StickyFooterWatcher({
           >
             <div className="max-w-[1440px] mx-auto px-12 py-4">{children}</div>
           </motion.div>
-        )}
-
-        {footerType === "static" && (
+        ) : footerType === "static" ? (
           <div
             key="static-footer"
             className="mt-16 py-8 border-t border-white/5 w-full bg-transparent text-center"
           >
             <div className="max-w-[1440px] mx-auto px-12">{children}</div>
           </div>
-        )}
+        ) : null}
       </AnimatePresence>
     </div>
   );

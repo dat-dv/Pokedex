@@ -45,11 +45,11 @@ export function PokemonList() {
 
       <div className="w-full relative min-h-[600px]">
         {firstLoading && (
-          <div className="absolute inset-0 z-10 bg-[#0a0a0a]">
+          <div className="absolute inset-0 z-10">
             <PokemonListLoading />
           </div>
         )}
-        
+
         {isEmpty && !firstLoading && (
           <div className="pt-10">
             <PokemonListEmpty />

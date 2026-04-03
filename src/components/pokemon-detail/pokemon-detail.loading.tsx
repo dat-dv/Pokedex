@@ -5,7 +5,7 @@ import { Zap } from "lucide-react";
 
 export default function Loading() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
+    <div className="min-h-screen flex items-center justify-center">
       <motion.div
         animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
         transition={{ duration: 2, repeat: Infinity }}

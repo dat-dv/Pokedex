@@ -69,10 +69,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="antialiased font-sans overflow-x-hidden bg-[#0a0a0a]">
+      <body className="antialiased font-sans overflow-x-hidden">
         <ApolloWrapper>
           <div className="max-w-[1440px] w-full mx-auto px-6 flex flex-col min-h-screen">
-            <main className="flex-grow mb-24">{children}</main>
+            <main className="flex-grow pb-48">{children}</main>
             <StickyFooter />
           </div>
         </ApolloWrapper>

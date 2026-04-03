@@ -8,7 +8,7 @@ export function BackNavigation({ className }: { className?: string }) {
   const router = useRouter();
 
   return (
-    <div className="sticky top-0 z-[100] py-8 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 -mx-6 px-6 mb-16">
+    <div className="sticky top-0 z-[100] py-8 backdrop-blur-xl border-b border-white/5 -mx-6 px-6 mb-16">
       <motion.button
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}

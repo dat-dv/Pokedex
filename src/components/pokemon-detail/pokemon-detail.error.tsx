@@ -20,7 +20,7 @@ export default function DetailError({
   }, [error]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center bg-[#0a0a0a]">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

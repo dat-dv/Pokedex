@@ -27,7 +27,7 @@ export default function PokemonDetail() {
   const colorSet = TYPE_COLORS[primaryType] || TYPE_COLORS.normal;
 
   return (
-    <div className="min-h-screen relative bg-[#0a0a0a]">
+    <div className="min-h-screen relative">
       <div
         className={cn(
           "absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-[160px] opacity-20 pointer-events-none transition-all duration-1000",
@@ -36,7 +36,7 @@ export default function PokemonDetail() {
       />
       <BackNavigation />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <PokemonHero
           pokemon={pokemon}
           typeColors={TYPE_COLORS}
